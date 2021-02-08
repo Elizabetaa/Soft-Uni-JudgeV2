@@ -51,4 +51,9 @@ public class UserServiceImpl implements UserService {
                 .setRoleEnumName(user.getRole().getName());
 
     }
+
+    @Override
+    public void logout() {
+        this.currentUser.setId(null).setUsername(null).setRoleEnumName(null);
+    }
 }
