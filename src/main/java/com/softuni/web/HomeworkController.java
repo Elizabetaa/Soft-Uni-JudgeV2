@@ -47,4 +47,9 @@ public class HomeworkController {
         return "redirect:/";
     }
 
+    @GetMapping("/check")
+    public String check(){
+        return "homework-check";
+    }
+
 }
