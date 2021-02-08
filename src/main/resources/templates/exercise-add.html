@@ -25,7 +25,7 @@
                             <div class="input-group mb-3">
                                 <label for="name" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Name
                                 </label>
-                                <input th:value="*{name}" id="name" name="name" type="text"
+                                <input th:value="*{name}" th:errorclass="bg-danger" id="name" name="name" type="text"
                                        class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"/>
 
                             </div>
@@ -39,7 +39,7 @@
                                 <label for="startedOn" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">StartedOn
                                     Date
                                 </label>
-                                <input th:value="*{startedOn}" id="startedOn" name="startedOn" type="datetime-local"
+                                <input th:value="*{startedOn}" th:errorclass="bg-danger" id="startedOn" name="startedOn" type="datetime-local"
                                        class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
                                        data-large-mode="true"/>
 
@@ -54,7 +54,7 @@
 
                                 <label for="dueDate" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Due Date
                                 </label>
-                                <input th:value="*{dueDate}" id="dueDate" name="dueDate" type="datetime-local"
+                                <input th:value="*{dueDate}"  th:errorclass="bg-danger" id="dueDate" name="dueDate" type="datetime-local"
                                        class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
                                        data-large-mode="true"/>
                             </div>
