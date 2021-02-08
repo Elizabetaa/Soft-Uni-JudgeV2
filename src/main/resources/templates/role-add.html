@@ -20,18 +20,13 @@
                 </div>
                 <div class="row mt-4 tm-edit-product-row">
                     <div class="col-xl-7 col-lg-7 col-md-12">
-                        <form action="#" method=""
+                        <form action="/role/add" method="POST" th:object="${names}"
                               class="tm-edit-product-form" >
                             <div class="input-group mb-3">
                                 <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Users</label>
                                 <select class="custom-select col-xl-9 col-lg-8 col-md-8 col-sm-7" id="username" name="username">
                                     <option value="" selected>Select user</option>
-                                    
-                                        <option>Pesho</option>
-										<option>Gosho</option>
-										<option>Veso</option>
-										
-                                    
+                                        <option th:each="n: ${names}" th:text="${n}">Pesho</option>
                                 </select>
                             </div>
                             <div class="input-group mb-3">

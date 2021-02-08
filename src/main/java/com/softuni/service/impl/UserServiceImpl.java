@@ -1,5 +1,6 @@
 package com.softuni.service.impl;
 
+import com.softuni.model.entity.Role;
 import com.softuni.model.entity.RoleEnumName;
 import com.softuni.model.entity.User;
 import com.softuni.model.service.UserServiceModel;
@@ -9,6 +10,8 @@ import com.softuni.service.RoleService;
 import com.softuni.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -55,5 +58,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public void logout() {
         this.currentUser.setId(null).setUsername(null).setRoleEnumName(null);
+    }
+
+    @Override
+    public List<String> getAllUsersNames() {
+        return this.userRepository.getAllUsernames();
+    }
+
+    @Override
+    public void changeRole(String username, RoleEnumName role) {
+        User user = this.userRepository.findByUsername(username);
+        if (user.getRole().getName() != role){
+            user.setRole(roleService.findRole(role));
+            this.userRepository.save(user);
+        }
     }
 }

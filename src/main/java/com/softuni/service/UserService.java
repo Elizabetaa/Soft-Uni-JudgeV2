@@ -1,7 +1,10 @@
 package com.softuni.service;
 
 
+import com.softuni.model.entity.RoleEnumName;
 import com.softuni.model.service.UserServiceModel;
+
+import java.util.List;
 
 public interface UserService {
     void registerUser(UserServiceModel userServiceModel);
@@ -12,4 +15,7 @@ public interface UserService {
 
     void logout();
 
+    List<String> getAllUsersNames();
+
+    void changeRole(String username, RoleEnumName valueOf);
 }
