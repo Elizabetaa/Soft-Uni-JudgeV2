@@ -18,4 +18,6 @@ public interface UserService {
     List<String> getAllUsersNames();
 
     void changeRole(String username, RoleEnumName valueOf);
+
+    UserServiceModel findByUsername(String username);
 }

@@ -73,4 +73,11 @@ public class UserServiceImpl implements UserService {
             this.userRepository.save(user);
         }
     }
+
+    @Override
+    public UserServiceModel findByUsername(String username) {
+        User user =this.userRepository.findByUsername(username);
+
+        return this.modelMapper.map(user,UserServiceModel.class);
+    }
 }
