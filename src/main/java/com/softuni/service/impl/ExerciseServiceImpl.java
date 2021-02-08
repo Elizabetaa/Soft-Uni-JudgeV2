@@ -7,6 +7,8 @@ import com.softuni.service.ExerciseService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ExerciseServiceImpl implements ExerciseService {
     private final ModelMapper modelMapper;
@@ -21,5 +23,15 @@ public class ExerciseServiceImpl implements ExerciseService {
     public void addExercise(ExerciseServiceModel exerciseServiceModel) {
         Exercise exercise = this.modelMapper.map(exerciseServiceModel,Exercise.class);
         this.exerciseRepository.save(exercise);
+    }
+
+    @Override
+    public List<String> getAllExerciseNames() {
+       return  this.exerciseRepository.findAllExNames();
+    }
+
+    @Override
+    public Exercise findByName(String name) {
+        return this.exerciseRepository.findByName(name);
     }
 }

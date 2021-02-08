@@ -21,7 +21,7 @@
                 </div>
                 <div class="row mt-4 tm-edit-product-row ">
                     <div class="col-xl-7 col-lg-7 col-md-12">
-                        <form action="#" method="" class="tm-edit-product-form">
+                        <form action="/homework/add" method="POST" th:object="${homeworkAddBindingModel}" class="tm-edit-product-form">
 
                             <div class="input-group mb-3">
                                 <h1>You late</h1>
@@ -33,10 +33,7 @@
                                         name="exercise">
                                     <option value="" selected>Select exercise</option>
 
-                                    <option>Exercise One</option>
-                                    <option>Exercise Two</option>
-                                    <option>Exercise Three</option>
-                                    <option>Exercise Four</option>
+                                    <option th:each="n : ${names}" th:text="${n}"></option>
 
                                 </select>
                             </div>
@@ -44,7 +41,7 @@
                                 <label for="gitAddress" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">
                                     Github address
                                 </label>
-                                <input id="gitAddress" name="gitAddress" type="text"
+                                <input th:value="*{gitAddress}" id="gitAddress" name="gitAddress" type="text"
                                        class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7">
                             </div>
 

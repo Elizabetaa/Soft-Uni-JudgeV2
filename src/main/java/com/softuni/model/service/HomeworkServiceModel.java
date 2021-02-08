@@ -1,58 +1,51 @@
-package com.softuni.model.entity;
+package com.softuni.model.service;
 
-import javax.persistence.*;
+import com.softuni.model.entity.Exercise;
+import com.softuni.model.entity.User;
+
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "homework")
-public class Homework extends BaseEntity{
+public class HomeworkServiceModel {
     private LocalDateTime addedOn;
     private String gitAddress;
     private User author;
     private Exercise exercise;
 
-    public Homework() {
+    public HomeworkServiceModel() {
     }
 
-    @Column(name = "added_on")
     public LocalDateTime getAddedOn() {
         return addedOn;
     }
 
-    public Homework setAddedOn(LocalDateTime addedOn) {
+    public HomeworkServiceModel setAddedOn(LocalDateTime addedOn) {
         this.addedOn = addedOn;
         return this;
     }
 
-    @Column(name = "git_address")
     public String getGitAddress() {
         return gitAddress;
     }
 
-    public Homework setGitAddress(String gitAddress) {
+    public HomeworkServiceModel setGitAddress(String gitAddress) {
         this.gitAddress = gitAddress;
         return this;
     }
 
-    @ManyToOne
     public User getAuthor() {
         return author;
     }
 
-    public Homework setAuthor(User author) {
+    public HomeworkServiceModel setAuthor(User author) {
         this.author = author;
         return this;
     }
 
-
-
-
-    @ManyToOne(fetch = FetchType.EAGER)
     public Exercise getExercise() {
         return exercise;
     }
 
-    public Homework setExercise(Exercise exercise) {
+    public HomeworkServiceModel setExercise(Exercise exercise) {
         this.exercise = exercise;
         return this;
     }
