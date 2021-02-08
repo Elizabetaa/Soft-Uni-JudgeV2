@@ -59,7 +59,7 @@ public class UserController {
 
             return "redirect:login";
         }
-        httpSession.setAttribute("user",user);
+        userService.login(user);
 
         return "redirect:/";
     }
