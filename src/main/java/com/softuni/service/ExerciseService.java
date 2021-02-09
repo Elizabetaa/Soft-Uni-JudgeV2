@@ -12,4 +12,5 @@ public interface ExerciseService {
 
     Exercise findByName(String name);
 
+    boolean checkIsLate(String exercise);
 }

@@ -28,28 +28,32 @@ public class HomeworkController {
     public String add(Model model){
             model.addAttribute("names", this.exerciseService.getAllExerciseNames());
         if (!model.containsAttribute("homeworkAddBindingModel")){
-            model.addAttribute(new HomeworkAddBindingModel());
+            model.addAttribute("isLate",false);
+            model.addAttribute("homeworkAddBindingModel", new HomeworkAddBindingModel());
         }
         return "homework-add";
     }
 
     @PostMapping("/add")
-    public String addConfirm(@Valid HomeworkAddBindingModel homeworkAddBindingModel, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String addConfirm(@Valid HomeworkAddBindingModel homeworkAddBindingModel,
+                             BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("homeworkAddBindingModel", homeworkAddBindingModel);
             redirectAttributes.addFlashAttribute("ork.springframework.validation.BindingResult.homeworkAddBindingModel", bindingResult);
+
+            return "redirect:add";
+        }
+
+        boolean isLate = exerciseService.checkIsLate(homeworkAddBindingModel.getExercise());
+
+        if (isLate){
+            redirectAttributes.addFlashAttribute("isLate", true);
             return "redirect:add";
         }
         this.homeworkService.addHomework(homeworkAddBindingModel);
-
-
         return "redirect:/";
     }
 
-    @GetMapping("/check")
-    public String check(){
-        return "homework-check";
-    }
 
 }

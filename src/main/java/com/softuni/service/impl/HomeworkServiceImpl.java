@@ -4,39 +4,37 @@ import com.softuni.model.binding.HomeworkAddBindingModel;
 import com.softuni.model.entity.Exercise;
 import com.softuni.model.entity.Homework;
 import com.softuni.model.entity.User;
-import com.softuni.repository.ExerciseRepository;
+import com.softuni.model.service.UserServiceModel;
 import com.softuni.repository.HomeworkRepository;
-import com.softuni.repository.UserRepository;
 import com.softuni.security.CurrentUser;
+import com.softuni.service.ExerciseService;
 import com.softuni.service.HomeworkService;
+import com.softuni.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
 public class HomeworkServiceImpl implements HomeworkService {
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final HomeworkRepository homeworkRepository;
-    private final ExerciseRepository exerciseRepository;
+    private final ExerciseService exerciseService;
     private final CurrentUser currentUser;
 
-    public HomeworkServiceImpl(UserRepository userRepository, HomeworkRepository homeworkRepository, ExerciseRepository exerciseRepository, CurrentUser currentUser) {
-        this.userRepository = userRepository;
+    public HomeworkServiceImpl(UserService userService, HomeworkRepository homeworkRepository, ExerciseService exerciseRepository, CurrentUser currentUser) {
+        this.userService = userService;
         this.homeworkRepository = homeworkRepository;
-        this.exerciseRepository = exerciseRepository;
+        this.exerciseService = exerciseRepository;
         this.currentUser = currentUser;
     }
 
     @Override
     public void addHomework(HomeworkAddBindingModel homeworkAddBindingModel) {
-        Exercise ex = this.exerciseRepository.findByName(homeworkAddBindingModel.getExercise());
-        User user = this.userRepository.findByUsername(currentUser.getUsername());
-
         Homework homework = new Homework()
                 .setAddedOn(LocalDateTime.now())
-                .setExercise(ex)
+                .setExercise(exerciseService.findByName(homeworkAddBindingModel.getExercise()))
                 .setGitAddress(homeworkAddBindingModel.getGitAddress())
-                .setAuthor(user);
+                .setAuthor(userService.findById(currentUser.getId()));
 
         this.homeworkRepository.save(homework);
     }
